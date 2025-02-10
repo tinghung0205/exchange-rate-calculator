@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>波波代購小站自助報價</title>
+    <title>人民幣轉台幣計算器</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -43,6 +43,14 @@
             margin-top: 20px;
             font-weight: bold;
         }
+        .info-text {
+            margin-top: 30px;
+            text-align: center;
+            display: none;
+        }
+        .red-text {
+            color: red;
+        }
     </style>
 </head>
 <body>
@@ -68,6 +76,10 @@
         
         <button onclick="calculateTWD()">計算</button>
         <p id="result"></p>
+        <div class="info-text" id="info">
+            <p>如商品後續有寄小站集運倉，包裹後續收費按照本站代收包裹計價</p>
+            <p>如需小站代替溝通，請直接連絡小站官方直接溝通</p>
+        </div>
     </div>
     
     <script>
@@ -81,16 +93,15 @@
             if (x < 100) {
                 let payTWD = Math.ceil(x * 4.68 + 30) + (y - 1) * 10 + z;
                 let buyTWD = Math.ceil((x * 4.68 + 30) / 10) * 10 + (y - 1) * 10 + z;
-                resultText = `代付報價金額台幣 ${payTWD} 元<br>代拍／代購報價金額台幣 ${buyTWD} 元`;
+                resultText = `代付報價金額台幣 <span class='red-text'>${payTWD}</span> 元<br>代拍／代購報價金額台幣 <span class='red-text'>${buyTWD}</span> 元`;
             } else {
                 let payTWD = Math.ceil(x * 4.68 * 1.03) + (y - 1) * 10 + z;
                 let buyTWD = Math.ceil((x * 4.73 * 1.03) / 10) * 10 + (y - 1) * 10 + z;
-                resultText = `代付報價金額台幣 ${payTWD} 元<br>代拍／代購報價金額台幣 ${buyTWD} 元`;
+                resultText = `代付報價金額台幣 <span class='red-text'>${payTWD}</span> 元<br>代拍／代購報價金額台幣 <span class='red-text'>${buyTWD}</span> 元`;
             }
             
-            resultText += `<br>如商品後續有寄小站集運倉，包裹後續收費按照本站代收包裹計價`;
-            resultText += `<br>如需小站代替溝通，請直接連絡小站官方直接溝通`;
             document.getElementById("result").innerHTML = resultText;
+            document.getElementById("info").style.display = "block";
         }
     </script>
 </body>
