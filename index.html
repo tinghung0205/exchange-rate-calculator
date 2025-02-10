@@ -17,27 +17,37 @@
     </style>
 </head>
 <body>
-    <h2>人民幣轉台幣計算器</h2>
+    <h2>人民幣轉台幣計算器 波波代購小站自助報價</h2>
     <label for="rmb">輸入所需人民幣金額:</label>
-    <input type="number" id="rmb" step="0.01" min="0">
+    <input type="number" id="rmb" step="0.01" min="0"><br>
+    <label for="payments">輸入總共需要付款幾次:(每多一次付款加價台幣10元)</label>
+    <input type="number" id="payments" step="1" min="1" value="1"><br>
+    <label for="login">是否需要登入您的帳號下單:(如有需求請輸入1，無需求請輸入0，有需求者加價台幣50元)</label>
+    <input type="number" id="login" step="1" min="0" max="1" value="0"><br>
+    <label for="communication">訂單是否需要小站代替溝通:(如有需求請輸入1，無需求請輸入0，有需求者可能會有額外收費，直接跟小站溝通)</label>
+    <input type="number" id="communication" step="1" min="0" max="1" value="0"><br>
     <button onclick="calculateTWD()">計算</button>
     <p id="result"></p>
     
     <script>
         function calculateTWD() {
             let x = parseFloat(document.getElementById("rmb").value);
+            let y = parseInt(document.getElementById("payments").value);
+            let z = parseInt(document.getElementById("login").value);
+            let n = parseInt(document.getElementById("communication").value);
             let resultText = "";
             
             if (x < 100) {
-                let payTWD = Math.ceil(x * 4.68 + 30);
-                let buyTWD = Math.ceil((x * 4.68 + 30) / 10) * 10;
-                resultText = `代付應收台幣 ${payTWD} 元<br>代拍／代購應收台幣 ${buyTWD} 元`;
+                let payTWD = Math.ceil(x * 4.68 + 30) + (y - 1) * 10 + z * 50;
+                let buyTWD = Math.ceil((x * 4.68 + 30) / 10) * 10 + (y - 1) * 10 + z * 50;
+                resultText = `代付報價金額台幣 ${payTWD} 元<br>代拍／代購報價金額台幣 ${buyTWD} 元`;
             } else {
-                let payTWD = Math.ceil(x * 4.68 * 1.03);
-                let buyTWD = Math.ceil((x * 4.73 * 1.03) / 10) * 10;
-                resultText = `代付應收台幣 ${payTWD} 元<br>代拍／代購應收台幣 ${buyTWD} 元`;
+                let payTWD = Math.ceil(x * 4.68 * 1.03) + (y - 1) * 10 + z * 50;
+                let buyTWD = Math.ceil((x * 4.73 * 1.03) / 10) * 10 + (y - 1) * 10 + z * 50;
+                resultText = `代付報價金額台幣 ${payTWD} 元<br>代拍／代購報價金額台幣 ${buyTWD} 元`;
             }
             
+            resultText += `<br>如商品後續有寄小站集運倉，包裹後續收費按照本站代收包裹計價`;
             document.getElementById("result").innerHTML = resultText;
         }
     </script>
